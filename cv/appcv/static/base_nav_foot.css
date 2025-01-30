@@ -1,0 +1,70 @@
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    /*background-color: #f4f4f4;  Contraste léger avec les cartes */
+    background:no-repeat center / cover url('images/fond.jpg' );
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+    color:#fff;
+}
+body a {
+    text-decoration: none;
+    color:#fff;
+
+}
+h1{
+    color:#fff;
+    font-size:clamp(70px,6vw,40px);
+    font-weight: bold;
+    font-family: Times, "Times New Roman", Georgia, serif;
+    padding:0px;
+    margin:0px;
+    height:55px;
+}
+
+
+
+
+/* Style général du footer */
+footer {
+    background-color: #444; /* Couleur de fond */
+    color: rgba(255, 255, 255, 0.9); /* Texte légèrement atténué */
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Liens dans le footer */
+footer a {
+    color: #00bcd4; /* Bleu clair pour les liens */
+    text-decoration: none;
+    transition: color 0.3s ease; /* Effet de transition pour les liens */
+}
+
+footer a:hover {
+    color: #ff9800; /* Couleur orange survolée */
+}
+
+/* Espacement pour éviter que le texte colle aux bords */
+footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Responsive pour petits écrans */
+@media (max-width: 576px) {
+    footer p {
+        font-size: 14px; /* Texte plus petit pour les mobiles */
+    }
+}
+
+footer .nav-logo{
+    justify-content: center;
+}
+footer .nav-logo img{
+    height: 80px;
+}

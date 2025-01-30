@@ -1,0 +1,37 @@
+
+
+{% block footer %}
+
+{% load static %}
+
+{% block style_page %}
+<link rel="stylesheet" href="{% static 'base1.css' %}">
+{% endblock %}
+
+
+<footer class="bg-dark text-light py-4">
+    <div class="footer-logo">
+        <img src="{% static 'images/cvchap_logo4.png' %}" alt="Logo" class="me-2">
+        <a class="navbar-brand" href="#">CvChap</a>
+    </div>
+    <div class="container text-center">
+        <p class="mb-2">© 2025 Mon CV | 
+            <a href="{% url 'contact__' %}" class="text-decoration-none text-info">Contact</a> | 
+            <a href="#" class="text-decoration-none text-info">Mentions légales</a>
+        </p>
+        <p>Suivez-nous sur : 
+            <a href="#" class="text-decoration-none text-info">Facebook</a>, 
+            <a href="#" class="text-decoration-none text-info">Twitter</a>, 
+            <a href="#" class="text-decoration-none text-info">LinkedIn</a>
+        </p>
+        <p>Suivez-nous sur : 
+            <a href="#" class="text-info"><i class="fab fa-facebook-f"></i> Facebook</a>, 
+            <a href="#" class="text-info"><i class="fab fa-twitter"></i> Twitter</a>, 
+            <a href="#" class="text-info"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+        </p>
+        
+    </div>
+</footer>
+{% endblock %}
+
+

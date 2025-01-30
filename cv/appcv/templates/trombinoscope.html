@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Trombinoscope{% endblock %}
+
+{% block style_page %}
+<link rel="stylesheet" href="{% static 'base.css' %}">
+<style>    
+/*_____________________________________________________________________________________________________________________________________*/    
+/*----------BARRE DE RECHERCHE ET EN TETE---------------------------------------------------------------------------------------------*/ 
+/*_____________________________________________________________________________________________________________________________________*/
+
+/*----  Barre de recherche --------------------------------------------------------------------------------*/
+   
+    #search {
+        border: 2px solid  rgb(160,215,102);
+        border-right: none;
+        border-radius: 25px 0 0 25px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        height: 47px;
+        width: 30%;
+        padding: 10px 20px;
+        margin-left:30%;
+        font-size: 1.3rem;
+        transition: all 0.3s ease;
+        background:transparent;
+        color: #000;
+        font-weight: bold;
+    }
+    
+    #search-btn {
+        border-radius: 0 25px 25px 0;
+        height: 70px;
+        padding: 10px 25px;
+        background-color: rgb(160,215,102); /* Couleur dorée */
+        color: #000;
+        border: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        font-size: 1.2rem;
+        transition: background-color 0.3s ease;
+    }
+    
+    #search-btn:hover {
+        background-color: #ffc107; /* Couleur légèrement plus foncée au survol */
+        color: #fff;
+    }
+    
+    /* Ombre pour la barre de recherche */
+    .input-group {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 40px 0px 50px 0px;
+        margin:0px 0px 70px 0px;;
+        align-items:center;
+        height:53px;
+    }
+
+/*_____________________________________________________________________________________________________________________________________*/
+/*---------- MISE EN FORME CARD TROMBINOSCOPE ---------------------------------------------------------------------------------------------*/ 
+/*_____________________________________________________________________________________________________________________________________*/
+
+ 
+    .card-body {
+        padding: 20px;
+        /*text-align: center;*//*si le card est reduit*/
+        background-color: #ffffff; /* Fond blanc pur */
+        border-top: 1px solid #eee; /* Légère séparation avec l'image */
+    }
+    
+    h5, p {
+        margin-bottom: 10px;
+    }
+    
+
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        margin-top: 10px;
+    }
+    
+    .card-text {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 15px;
+        line-height: 1.5;
+    }
+    
+    /* Style des cartes */
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        padding: 15px;
+        margin: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre douce */
+        background-color: #ffffff;
+    }
+    
+    .card:hover {
+        transform: translateY(-8px); /* Élévation plus marquée */
+        box-shadow: 0 8px 20px rgba(0, 128, 255, 0.93); /* Ombre plus nette */
+    }
+    
+    /* Style des images */
+    .card-img-top {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        max-height: 200px;
+        border-bottom: 1px solid #eee; /* Séparation entre l'image et le contenu */
+    }
+
+    #user-list {
+        display: flex;
+        flex-wrap: wrap; /* Permet d'aller à la ligne si nécessaire */
+        justify-content: center; /* Centre les éléments horizontalement */
+        gap: 20px; /* Espacement entre les cartes */
+    }
+    
+    #user-list .user-item {
+        flex: 1 1 calc(25% - 20px); /* Largeur de 25% pour 4 cartes par ligne, avec marge incluse */
+        max-width: calc(25% - 20px);
+        box-sizing: border-box; /* Assure que les marges sont prises en compte */
+    }
+    
+    @media (max-width: 768px) {
+        #user-list .user-item {
+            flex: 1 1 calc(50% - 20px); /* 2 cartes par ligne sur les petits écrans */
+            max-width: calc(50% - 20px);
+        }
+    }
+    
+    @media (max-width: 576px) {
+        #user-list .user-item {
+            flex: 1 1 100%; /* 1 carte par ligne sur les très petits écrans */
+            max-width: 100%;
+        }
+    }
+    
+/*_____________________________________________________________________________________________________________________________________*/
+/*---------- PAGINATION ---------------------------------------------------------------------------------------------*/ 
+/*_____________________________________________________________________________________________________________________________________*/
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        gap: 10px; /* Espacement entre les boutons */
+    }
+    
+    .pagination a {
+        margin: 0;
+        padding: 8px 16px;
+        text-decoration: none;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #ffffff;
+        color: #007bff;
+        transition: all 0.3s ease;
+    }
+    
+    .pagination a:hover {
+        background-color: #007bff;
+        color: white;
+    }
+      
+</style>
+
+{% endblock %}
+
+{% block content %}
+<h1 class="my-4 text-center">Trombinoscope</h1>
+
+<!-- Barre de recherche -->
+<div class="container my-4">
+    <div class="row_recherche">
+        <div class="col-md-8 offset-md-2">
+            <div class="input-group">
+                <input type="text" class="form-control" id="search" placeholder="Rechercher un utilisateur...">
+                <button class="btn" id="search-btn">
+                    <i class="bi bi-search"></i> Rechercher
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Trombinoscope -->
+<div class="row" id="user-list">
+    {% for item in page_obj %}
+    <div class="col-md-4 col-sm-6 mb-4 user-item">
+        <a href="{% url 'cv_detail' pk=item.premier_cv.id %}">
+            <div class="card">
+                <img src="{{ item.personne.photo.url }}" class="card-img-top" alt="{{ item.personne.nom }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.personne.prenom }} {{ item.personne.nom }}</h5>
+                    <p class="card-text">{{ item.personne.user.username }}</p>
+                    {% if item.premier_cv %}
+                    <a href="{% url 'cv_detail' pk=item.premier_cv.id %}" class="btn btn-primary">En savoir plus</a>
+                    {% else %}
+                    <p>Aucun CV</p>
+                    {% endif %}
+                </div>
+            </div>
+        </a>
+    </div>
+    {% empty %}
+    <p>Aucun utilisateur trouvé.</p>
+    {% endfor %}
+</div>
+
+<!-- Pagination -->
+<div class="pagination">
+    {% if page_obj.has_previous %}
+    <a href="?page=1">&laquo; Première</a>
+    <a href="?page={{ page_obj.previous_page_number }}">Précédent</a>
+    {% endif %}
+    
+    <span>Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}</span>
+    
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">Suivant</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}">Dernière &raquo;</a>
+    {% endif %}
+</div>
+{% endblock %}

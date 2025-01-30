@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Design 1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .cv-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .cv-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .cv-header h1 {
+            margin: 0;
+            font-size: 36px;
+            color: #007bff;
+        }
+        .cv-header p {
+            font-size: 18px;
+            color: #555;
+        }
+        .section-title {
+            font-size: 24px;
+            color: #007bff;
+            margin-top: 20px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+        .section-content {
+            margin-top: 10px;
+        }
+        .section-content ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .section-content li {
+            margin: 5px 0;
+        }
+        .action-buttons {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .action-buttons button {
+            margin-left: 10px;
+            padding: 10px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .action-buttons .btn-print {
+            background-color: #28a745;
+            color: white;
+        }
+        .action-buttons .btn-edit {
+            background-color: #007bff;
+            color: white;
+        }
+        .action-buttons .btn-delete {
+            background-color: #dc3545;
+            color: white;
+        }
+        .action-buttons button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <!-- Boutons d'action -->
+        <div class="action-buttons">
+            <!-- Bouton pour imprimer -->
+            <button class="btn-print" onclick="window.print()">Imprimer</button>
+
+            <!-- Bouton pour modifier -->
+            <form action="{% url 'edit_cv' cv.id %}" method="GET" style="display:inline;">
+                <button class="btn-edit" type="submit">Modifier</button>
+            </form>
+
+            <!-- Bouton pour envoyer par e-mail -->
+<form action="{% url 'CV_Pemail' cv.id %}" method="GET" style="display:inline;">
+    {% csrf_token %}
+    <button class="btn-email" type="submit" style="background-color: #ffc107; color: white;">Envoyer par e-mail</button>
+</form>
+
+            <!-- Bouton pour supprimer -->
+            <form action="{% url 'supretionCV' cv.id %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button class="btn-delete" type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce CV ?');">Supprimer</button>
+            </form>
+        </div>
+
+        <!-- Contenu du CV -->
+        <div class="cv-header">
+            <h1>{{ cv.personne.nom }} {{ cv.personne.prenom }}</h1>
+            <p>{{ cv.contact.email }} | {{ cv.contact.telephone }}</p>
+
+            <!-- Affichage de la photo -->
+            {% if cv.personne.photo %}
+            <img src="{{ cv.personne.photo.url }}" alt="Photo de {{ cv.personne.prenom }} {{ cv.personne.nom }}">
+        {% else %}
+            <img src="https://via.placeholder.com/100" alt="Photo par défaut">
+        {% endif %}
+        </div>
+
+        <div class="section">
+            <div class="section-title">Expériences</div>
+            <div class="section-content">
+                <ul>
+                    {% for experience in experiences %}
+                        <li><strong>{{ experience.titre }}</strong> - {{ experience.entreprise }} ({{ experience.date_debut }} - {{ experience.date_fin }})</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Formations</div>
+            <div class="section-content">
+                <ul>
+                    {% for formation in formations %}
+                        <li><strong>{{ formation.diplome }}</strong> - {{ formation.institution }} ({{ formation.date_debut }} - {{ formation.date_fin }})</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Compétences</div>
+            <div class="section-content">
+                <ul>
+                    {% for competence in competences %}
+                        <li>{{ competence.nom }} - Niveau: {{ competence.niveau }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Langues</div>
+            <div class="section-content">
+                <ul>
+                    {% for langue in langues %}
+                        <li>{{ langue.langue }} - Niveau: {{ langue.niveau }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Loisirs</div>
+            <div class="section-content">
+                <ul>
+                    {% for loisir in loisirs %}
+                        <li>{{ loisir.nom }} - {{ loisir.description }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un loisir</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'loisir.css' %}">
+</head>
+<body>
+    <h1>Ajouter un loisir</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="nom">Nom du loisir :</label>
+            <input type="text" name="nom" id="nom" required>
+        </div>
+        <div>
+            <label for="description">Description :</label>
+            <textarea name="description" id="description" required></textarea>
+        </div>
+        <div>
+            <button type="submit">Ajouter</button>
+        </div>
+        <a href="{% url 'aff_loisirs' %}">
+            <button type="button">Voir mes loisirs</button>
+        </a>
+        
+    </form>
+
+    {% include "partiel/retoure.html" %}
+
+</body>
+</html>

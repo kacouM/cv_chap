@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum Vitae</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .cv-container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f0f0f0;
+            text-align: left;
+            padding: 8px;
+        }
+        td {
+            padding: 8px;
+        }
+        .section-title {
+            font-weight: bold;
+            background-color: #f0f0f0;
+            padding: 10px;
+        }
+        .contact-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="cv-container">
+    <h1>Curriculum Vitae</h1>
+    <!-- Informations Personnelles -->
+    <div class="contact-info">
+        <h2>{{ personne.prenom }} {{ personne.nom }}</h2>
+        {% if personne.photo and personne.photo.url %}
+        <img src="{{ personne.photo.url }}" alt="Photo de {{ personne.prenom }}" style="width: 150px; height: auto; border-radius: 50%;">
+    {% else %}
+        <p>Aucune photo disponible.</p>
+        <!-- Optionnel : afficher une image par défaut -->
+        <img src="/media/photos/default.jpg" alt="Image par défaut" style="width: 150px; height: auto; border-radius: 50%;">
+    {% endif %}
+    
+        <p>Email : {{ contact.email }}</p>
+        <p>Téléphone : {{ contact.telephone }}</p>
+        <p>Adresse : {{ contact.adresse }}</p>
+    </div>
+    
+
+    <!-- Table des expériences professionnelles -->
+    <div class="section-title">Expérience Professionnelle</div>
+    <table>
+        <tr>
+            <th>Poste</th>
+            <th>Entreprise</th>
+            <th>Periode</th>
+            <th>Description</th>
+        </tr>
+        {% for experience in experiences %}
+        <tr>
+            <td>{{ experience.titre }}</td>
+            <td>{{ experience.entreprise }}</td>
+            <td>du {{ experience.date_debut }} au {% if experience.date_fin %}{{ experience.date_fin }}{% else %}Présent{% endif %}</td>
+            <td>{{ experience.description }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Table des formations -->
+    <div class="section-title">Formation</div>
+    <table>
+        <tr>
+            <th>Diplôme</th>
+            <th>Institution</th>
+            <th>Periode</th>
+        </tr>
+        {% for formation in formations %}
+        <tr>
+            <td>{{ formation.diplome }}</td>
+            <td>{{ formation.institution }}</td>
+            <td>Du {{ formation.date_debut }} au {% if formation.date_fin %}{{ formation.date_fin }}{% else %}Présent{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Table des compétences -->
+    <div class="section-title">Compétences</div>
+    <table>
+        <tr>
+            <th>Compétence</th>
+            <th>Niveau</th>
+        </tr>
+        {% for competence in competences %}
+        <tr>
+            <td>{{ competence.nom }}</td>
+            <td>{{ competence.niveau }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Table des langues -->
+    <div class="section-title">Langues</div>
+    <table>
+        <tr>
+            <th>Langue</th>
+            <th>Niveau</th>
+        </tr>
+        {% for langue in langues %}
+        <tr>
+            <td>{{ langue.langue }}</td>
+            <td>{{ langue.niveau }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<button style="color: white; background-color: red; font-size: 30px;">telecharger</button>
+</body>
+</html>

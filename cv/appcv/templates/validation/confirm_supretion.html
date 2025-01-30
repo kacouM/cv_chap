@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirmer la suppression</title>
+</head>
+<body>
+    <h1>Confirmer la suppression</h1>
+    <p>Êtes-vous sûr de vouloir supprimer le CV de {{ cv.personne.nom }} {{ cv.personne.prenom }} ?</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Supprimer</button>
+        <a href="{% url 'list_cv' %}"><button type="button">Annuler</button></a>
+    </form>
+</body>
+</html>

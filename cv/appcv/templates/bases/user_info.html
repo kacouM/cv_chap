@@ -1,0 +1,18 @@
+<li id="user-info">
+    {% if user.is_authenticated %}
+        <span>Bienvenue, {{ user.username }}</span>
+        <a href="{% url 'logout' %}" hx-get="{% url 'logout' %}" hx-target="#user-info" hx-swap="outerHTML">Déconnexion</a>
+    {% else %}
+        <a href="{% url 'formulaire' %}">Se connecter</a>
+        <a href="{% url 'register' %}">S'inscrire</a>
+    {% endif %}
+</li>
+<li id="user-info">
+    {% if user.is_authenticated %}
+        <span>Bienvenue, {{ user.username }}</span>
+        <a href="{% url 'logout' %}" hx-get="{% url 'logout' %}" hx-target="#user-info" hx-swap="outerHTML">Déconnexion</a>
+    {% else %}
+        <a href="{% url 'formulaire' %}">Se connecter</a>
+        <a href="{% url 'register' %}">S'inscrire</a>
+    {% endif %}
+</li>

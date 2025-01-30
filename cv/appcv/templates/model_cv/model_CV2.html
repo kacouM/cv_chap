@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mon cv</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'cv_a.css' %}">
+    <!-- <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"> -->
+</head>
+
+<body>
+
+
+ <!-- Boutons d'action -->
+ <div class="action-buttons">
+    <!-- Bouton pour imprimer -->
+    <button class="btn-print" onclick="window.print()">Imprimer</button>
+
+    <!-- Bouton pour modifier -->
+    <form action="{% url 'edit_cv' cv.id %}" method="GET" style="display:inline;">
+        <button class="btn-edit" type="submit">Modifier</button>
+    </form>
+
+    <!-- Bouton pour envoyer par e-mail -->
+<form action="{% url 'CV_Pemail' cv.id %}" method="GET" style="display:inline;">
+{% csrf_token %}
+<button class="btn-email" type="submit" style="background-color: #ffc107; color: white;">Envoyer par e-mail</button>
+</form>
+
+    <!-- Bouton pour supprimer -->
+    <form action="{% url 'supretionCV' cv.id %}" method="POST" style="display:inline;">
+        {% csrf_token %}
+        <button class="btn-delete" type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce CV ?');">Supprimer</button>
+    </form>
+</div>
+
+
+
+    <div class="cv">
+        <div class="im_nompre">
+            <div class="im">
+               <!-- Affichage de la photo -->
+            {% if cv.personne.photo %}
+            <img src="{{ cv.personne.photo.url }}" alt="Photo de {{ cv.personne.prenom }} {{ cv.personne.nom }}">
+        {% else %}
+            <img src="https://via.placeholder.com/100" alt="Photo par défaut">
+        {% endif %}
+            </div>
+            <div class="nompre">
+                <p>NOM ET PRENOM</p>
+                <h3>{{ personne.nom }} {{ personne.prenom }}</h3>
+                <br>
+                <hr>
+            </div>
+
+        </div>
+        <div class="pcl_tire">
+            <div class="pcl">
+                
+                <h3>profil</h3>
+                <p>
+
+                    <span class="petititre">
+                        <img class="icone" src="{% static 'images/location.png' %}" alt="">
+                        adresse</span>
+                    <span class="donnee">{{ cv.contact.adresse }}</span>
+                </p>
+                <p><i class="uit uit-envelope"></i>
+                    <span class="petititre">
+                        Email</span>
+                    <span class="donnee">{{ cv.contact.email }}</span>
+                </p>
+                <p>
+                    <span class="petititre">
+                        <img class="icone_telephone" src="{% static 'images/telephone.png'%}" alt="">
+                        Telephone</span>
+                    <span class="donnee"> {{ cv.contact.telephone }}</span>
+                </p>
+                <P>
+                    <span class="petititre">
+                        <img class="icone_date" src="{% static 'images/calendar.png' %} " alt="">
+                        Date de naissance</span>
+                    <span class="donnee">{{ cv.personne.date_naissance }}</span>
+                </P>
+                <div class="icon-compet">
+                    <img class="icone_competence" src="{% static 'images/competency.png' %} " alt="">
+                <h3>     
+                    competence
+                </h3>
+            </div>
+            {% for competence in competences %}
+                <span class="donnee">
+                 <span class="petititre">Competence</span>:{{ competence.nom }} <br>
+                 <span class="petititre">Niveau</span>:{{ competence.niveau }}
+                </span>
+                {% endfor %}
+
+            </div>
+            <div class="tire_vertical">
+
+            </div>
+            <div class="ex-for">
+                <!-- block experience et formation -->
+                <div class="ex">
+                    <!--pour le block experience -->
+                    <div class="ic_exp">
+                        <img class="icone_experience" src="{% static 'images/experience.png' %} " alt="">
+                        <h2>
+                            exparience profetionnelle</h2>
+                    </div>
+                    {% for experience in experiences %}
+                   
+                
+                    <span class="petititre">experience</span>{{ experience.titre }}
+                
+                        <span class="petititre">Compagnie</span> {{ experience.entreprise }} <br>
+                        <span class="petititre">description</span> <span class="description"> {{ experience.description }} </span>
+                        <br><span class="petititre"> Debut  </span> {{ experience.date_debut }} ;
+                        <br><span class="petititre"> Fin  </span>{{ experience.date_fin }}
+                     <br> 
+                    {% endfor %}
+                </div>
+                <div class="for">
+                    <!--pour le block formation --> <br> <br>
+                    <h2>  
+                        <img class="icone_formation" src="{% static 'images/learning (1).png' %}" alt="">
+                        
+                    formation</h2>
+
+                    {% for formation in formations %}
+                    <span class="petititre">Diplome </span>{{ formation.diplome }}
+                    <span class="petititre">etablicement </span>{{ formation.institution }}
+                    <span class="donnee">
+                        <span class="petititre"> Debut  </span>{{ formation.date_debut }} <br>
+                        
+                        <span class="petititre"> Fin</span> {{ formation.date_fin }}
+                    </span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

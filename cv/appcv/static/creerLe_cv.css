@@ -1,0 +1,98 @@
+
+/* Formulaire */
+.from_creer_cv {
+    width: 70%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.from_creer_cv label {
+    font-size: 16px;
+    color: #555;
+    display: block;
+    margin-top: 10px;
+}
+
+.from_creer_cv select,
+.from_creer_cv input[type="checkbox"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.from_creer_cv input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+}
+
+.from_creer_cv a {
+    display: inline-block;
+    margin-top: 10px;
+    
+}
+
+/*button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button[type="button"] {
+    width: auto;
+    background-color: #008CBA;
+    font-size: 16px;
+    padding: 10px 20px;
+}
+
+button[type="button"]:hover {
+    background-color: #007B9E;
+}*/
+
+/* Sections */
+#experiences, #formations, #competences, #langues, #loisirs {
+    margin-top: 10px;
+}
+
+#experiences label, #formations label, #competences label, #langues label, #loisirs label {
+    display: block;
+    margin-top: 5px;
+}
+
+/* Boutons supplémentaires */
+/*
+a button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #008CBA;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+a button:hover {
+    background-color: #007B9E;
+}*/
+.Voircv{
+    margin-left: 100px;
+}

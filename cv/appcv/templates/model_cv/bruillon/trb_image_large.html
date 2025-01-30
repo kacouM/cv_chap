@@ -1,0 +1,345 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Trombinoscope {% endblock %}
+{% block style_page %}
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        background-color: #f4f4f4; /* Contraste léger avec les cartes */
+        margin: 0;
+        padding: 0;
+        box-sizing:border-box;
+    }
+    
+    .card-body {
+        padding: 20px;
+        /*text-align: center;*//*si le card est reduit*/
+        background-color: #ffffff; /* Fond blanc pur */
+        border-top: 1px solid #eee; /* Légère séparation avec l'image */
+    }
+    
+    h5, p {
+        margin-bottom: 10px;
+    }
+    
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        margin-top: 10px;
+    }
+    
+    .card-text {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 15px;
+        line-height: 1.5;
+    }
+    
+    /* Style des cartes */
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        padding: 15px;
+        margin: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre douce */
+        background-color: #ffffff;
+    }
+    
+    .card:hover {
+        transform: translateY(-8px); /* Élévation plus marquée */
+        box-shadow: 0 8px 20px rgba(0, 128, 255, 0.93); /* Ombre plus nette */
+    }
+    
+    /* Style des images */
+    .card-img-top {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        max-height: 200px;
+        border-bottom: 1px solid #eee; /* Séparation entre l'image et le contenu */
+    }
+    
+    /* Style des boutons */
+    .btn {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        text-align: center;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+    
+    .btn:hover {
+        background-color: #0056b3;
+    }
+    
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        gap: 10px; /* Espacement entre les boutons */
+    }
+    
+    .pagination a {
+        margin: 0;
+        padding: 8px 16px;
+        text-decoration: none;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #ffffff;
+        color: #007bff;
+        transition: all 0.3s ease;
+    }
+    
+    .pagination a:hover {
+        background-color: #007bff;
+        color: white;
+    }
+    
+    /* Espacement sur les grands écrans */
+    @media (min-width: 768px) {
+        .card {
+            margin: 20px auto;
+            max-width: 90%; /* Limite la largeur de la carte */
+        }
+    }
+    
+    /* Espacement et alignement sur petits écrans */
+    @media (max-width: 768px) {
+        .card {
+            margin: 10px auto;
+        }
+    }
+
+    /*_____________________________________________________________________________________________________________________________________*/
+    /*----------BARRE DE RECHERCHE ET EN TETE---------------------------------------------------------------------------------------------*/ 
+    /*_____________________________________________________________________________________________________________________________________*/
+
+
+    /*----  Aspect general en tete ----------------------------------------------------------------------------*/
+
+    nav{ /*Si pas utilisé suprimer*/
+        height: 80px;
+        width: 100%;
+        background: rgba(0, 123, 255);
+        display: flex;
+        justify-content:space-between;
+        align-item: center;
+        margin:0px;
+        padding:0px;
+
+    }
+
+    nav ul li{
+        display: inline-block;
+        line-height: 80px;
+        margin: 0 10px;
+    }
+
+    nav ul li a{
+        text-decoration: none;
+        color: #fff;
+        padding:7px;
+
+    }
+
+
+
+    /*----  Barre de recherche --------------------------------------------------------------------------------*/
+   
+    /*#search {
+        border: 20px solid  /*#ddd*/;
+        border-right: none;
+        border-radius: 25px 0 0 25px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        height: 45px;
+        padding: 10px 20px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }*/
+    
+    #search-btn {
+        border-radius: 0 25px 25px 0;
+        height: 45px;
+        padding: 10px 25px;
+        background-color: #ffd700; /* Couleur dorée */
+        color: #000;
+        border: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+    }
+    
+    #search-btn:hover {
+        background-color: #ffc107; /* Couleur légèrement plus foncée au survol */
+        color: #fff;
+    }
+    
+    /* Ombre pour la barre de recherche */
+    .input-group {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #ffd700; /* la couleur Jaune */
+
+    }
+
+    /*----  Style des boutons   -------------------------------------------------------------------------------- */
+    
+
+    
+    /*----   Logo et titre de la navbar  -------------------------------------------------------------------------*/
+    
+    .nav-logo img {
+        height: 50px; /* Ajustement de la taille du logo */
+        height: 50px;
+        margin-left: 20px;
+
+    }
+    
+
+
+
+</style>
+{% endblock  %}
+
+
+
+{% block content %}
+<!-- En-tête -->
+<!-- En-tête -->
+<nav class="navbar navbar-expand-lg sticky-top">
+    <!-- Logo et titre -->
+    <div class="nav-logo">
+        <img src="{% static 'images/cv_chap_logo3.png' %}" alt="Logo" class="me-2">
+        <a class="navbar-brand" href="#">CvChap</a>
+    </div>
+    
+    <!-- Bouton toggle mobile -->
+    <!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>-->
+
+    <!-- Menu de navigation -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'trombinoscope' %}active{% endif %}" href="{% url 'trombinoscope' %}">Trombinoscope</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'list_cv' %}active{% endif %}" href="{% url 'list_cv' %}">Mes CV</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="{% url 'logout' %}">Se déconnecter</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'connexion' %}active{% endif %}" href="{% url 'connexion' %}">Se connecter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'register' %}active{% endif %}" href="{% url 'register' %}">S'inscrire</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+<!-- Trombinoscope -->
+<h1 class="my-4 text-center">Trombinoscope</h1>
+
+<!-- Barre de recherche -->
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="input-group">
+                <input type="text" class="form-control" id="search" placeholder="Rechercher un utilisateur...">
+                <button class="btn" id="search-btn">
+                    <i class="bi bi-search"></i> Rechercher
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+
+    <div class="row" id="user-list">
+        {% for item in page_obj %}
+        <div class="col-md-4 col-sm-6 mb-4 user-item">
+            <a href="{% url 'cv_detail' pk=item.premier_cv.id %}" >
+                <div class="card">
+                    <img src="{{ item.personne.photo.url }}" class="card-img-top" alt="{{ item.personne.nom }}">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ item.personne.prenom }} {{ item.personne.nom }}</h5>
+                        <p class="card-text">{{ item.personne.user.username }}</p>
+                        {% if item.premier_cv %}
+                        <a href="{% url 'cv_detail' pk=item.premier_cv.id %}" class="btn btn-primary">En savoir plus</a>
+                        {% else %}
+                        <p>Aucun CV</p>
+                        {% endif %}
+                    </div>
+                </div> 
+            </a>
+        </div>
+        {% empty %}
+        <p>Aucun utilisateur trouvé.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; Première</a>
+        <a href="?page={{ page_obj.previous_page_number }}">Précédent</a>
+        {% endif %}
+        
+        <span>Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}</span>
+        
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Suivant</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">Dernière &raquo;</a>
+        {% endif %}
+    </div>
+</div>
+
+
+<!-- Footer -->
+<footer class="bg-light py-4">
+    <div class="container text-center">
+      <p>Mon CV - 2025 | <a href="{% url 'contact__' %}">Contact</a> | <a href="#">Mentions légales</a></p>
+    </div>
+</footer>
+  
+
+<!-- Script de recherche dynamique -->
+<script>
+    // Fonction de recherche dynamique
+    document.getElementById('search').addEventListener('input', function() {
+        const query = this.value.toLowerCase();
+        const users = document.querySelectorAll('.user-item');
+        
+        users.forEach(function(user) {
+            const name = user.querySelector('.card-title').textContent.toLowerCase();
+            if (name.includes(query)) {
+                user.style.display = 'block';
+            } else {
+                user.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+{% endblock %}

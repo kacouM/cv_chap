@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Mes Informations Personnelles{% endblock %}
+{% block style_page %}
+    {% load static %}
+    <style>
+        .div_info_perso{
+            margin:20px;
+            border-radius:10px;
+            border:1px solid #000;
+            width:30%;
+        }
+    </style>
+{% endblock %}
+
+{% block content %} 
+    <h1>Mes Informations Personnelles</h1>
+    <div class='div_info_perso'>
+        {% if personne %}
+            <p><strong>Nom :</strong> {{ personne.nom }}</p>
+            <p><strong>Prénom :</strong> {{ personne.prenom }}</p>
+            <p><strong>Date de Naissance :</strong> {{ personne.date_naissance }}</p>
+            <p><strong>Photo :</strong>
+                {% if personne.photo %}
+                    <img src="{{ personne.photo.url }}" alt="Photo de profil" width="150">
+                {% else %}
+                    Aucune photo disponible.
+                {% endif %}
+            </p>
+        {% else %}
+            <p>Aucune information personnelle disponible.</p>
+        {% endif %}        
+    </div>
+
+{% endblock %}

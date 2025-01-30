@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Mes Langues{% endblock %}
+{% block style_page %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "experiencepro1.css" %}">
+{% endblock %}
+
+{% block content %} 
+    <h1>Mes Langues</h1>
+
+    {% if langues %}
+        <ul>
+            {% for langue in langues %}
+                <li>
+                    <strong>{{ langue.nom }}</strong><br>
+                    <p>Niveau : {{ langue.niveau }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Vous n'avez pas encore ajouté de langues.</p>
+    {% endif %}
+
+    <a href="{% url 'addLangue' %}">
+        <button type="button">Ajouter une langue</button>
+    </a>
+    
+{% endblock %}
+    

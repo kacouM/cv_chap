@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Créer un CV{% endblock %}
+{% block style_page %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Tde_Bord.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>Créer un CV</h1>
+    <!-- Formulaire de vérification du mot de passe -->
+    <form class='form_tbord' method="POST">
+        {% csrf_token %}
+        <div>
+            <button class='btn_tbord' type="button" onclick="window.location.href='{% url 'EtatCivil' %}'">Etat civile</button>
+        </div>
+
+        <br> <br>
+
+        <div>
+            <button class='btn_tbord' type="button" onclick="window.location.href='{% url 'contact__' %}'">créer ou modifier mes contacte</button>
+        </div>
+
+        <br> <br>
+        <div>
+            <button class='btn_tbord' type="button" onclick="window.location.href='{% url 'formation' %}'">Ajouter une formation</button>
+        </div>
+
+        <br> <br>
+
+        <div>
+            <button class='btn_tbord' type="button" onclick="window.location.href='{% url 'competence' %}'">Ajouter une compétence</button>
+        </div>
+
+        <br> <br>
+
+        <div>
+            <button class='btn_tbord' type="button" onclick="window.location.href='{% url 'experiencePro' %}'">Ajouter une
+                expérience</button>
+        </div>
+        <br> <br>
+        <div>
+            <button class='btn_tbord' type="button" onclick="window.location.href='{% url 'loisir' %}'">Ajouter un
+                loisir</button>
+        </div>
+
+        <br> <br>
+
+        <div>
+            <button class='btn_tbord' type="button" onclick="window.location.href='{% url 'langue' %}'">Ajouter une
+                langue</button>
+        </div>
+
+        <br> <br>
+
+        <div>
+            <button class='btn_tbord' type="button" onclick="window.location.href='{% url 'creerLe_cv' %}'">Ajouter un cv</button>
+        </div>
+
+    </form>
+
+{% endblock %}
+

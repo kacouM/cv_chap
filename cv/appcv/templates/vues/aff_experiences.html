@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Mes Expériences{% endblock %}
+{% block style_page %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "experiencepro1.css" %}">
+    <style>
+        .item_aff_exp{
+            padding: 20px;
+            margin:20px;
+            width:20%;
+            height: 100%;
+            flex-grow: 1;
+            background:#eee;
+            border:1px solid #000;
+            border-radius:10px;     
+        }     
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class=content>
+    <h1>Mes Expériences Professionnelles</h1>
+    <div class='contenu_aff_exp'>
+        <!-- Vérifier si l'utilisateur a des expériences -->
+        {% if experiences %}
+        <ul>
+            <!-- Afficher chaque expérience dans une liste -->
+            {% for experience in experiences %}
+                <li class='item_aff_exp'>
+                    <strong>{{ experience.titre }}</strong><br>
+                    <em>{{ experience.date_debut }} - {% if experience.date_fin %}{{ experience.date_fin }}{% else %}En cours{% endif %}</em><br>
+                    <p>{{ experience.description }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>Vous n'avez pas encore ajouté d'expériences professionnelles.</p>
+        {% endif %}
+    </div>
+    <!-- Lien pour revenir à la page de création ou d'édition des expériences -->
+    <a href="{% url 'experience_pro' %}">
+        <button type="button">Ajouter une expérience</button>
+    </a>
+    <!-- Lien pour revenir à la page d'accueil ou à d'autres sections -->
+    <a href="{% url 'experience_pro' %}">
+        <button type="button">Retour à l'accueil</button> 
+    </a>
+</div>    
+{% endblock  %}
+

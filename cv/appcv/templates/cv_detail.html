@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}CV de {{ cv.personne.prenom }} {{ cv.personne.nom }}{% endblock %}
+{% block style_page %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'creerLe_cv.css' %}">
+    <style>
+        .cv_detail_container{
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .header img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-right: 20px;
+            border: 3px solid #007BFF;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #007BFF;
+        }
+        .header h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #555;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h3 {
+            color: #007BFF;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .section ul li {
+            margin-bottom: 10px;
+        }
+        .section ul li strong {
+            font-weight: bold;
+        }
+        
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="cv_detail_container">
+        <!-- Header -->
+        <div class="header">
+            {% if cv.personne.photo %}
+                <img src="{{ cv.personne.photo.url }}" alt="Photo de {{ cv.personne.prenom }} {{ cv.personne.nom }}">
+            {% else %}
+                <img src="https://via.placeholder.com/100" alt="Photo par défaut">
+            {% endif %}
+            <div>
+                <h1>{{ cv.personne.prenom }} {{ cv.personne.nom }}</h1>
+                <h2>{{ cv.personne.titre_poste }}</h2>
+                <p>{{ cv.personne.description|default:"Aucune description fournie." }}</p>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="section">
+            <h3>Informations de contact</h3>
+            <ul>
+                <li><strong>Email :</strong> {{ cv.contact.email }}</li>
+                <li><strong>Téléphone :</strong> {{ cv.contact.telephone }}</li>
+                <li><strong>Adresse :</strong> {{ cv.contact.adresse }}</li>
+            </ul>
+        </div>
+
+        <!-- Expériences professionnelles -->
+        <div class="section">
+            <h3>Expériences professionnelles</h3>
+            {% if cv.experiences.exists %}
+                <ul>
+                    {% for experience in cv.experiences.all %}
+                        <li>
+                            <strong>{{ experience.titre }}</strong> chez {{ experience.entreprise }}<br>
+                            <small>{{ experience.date_debut }} - {{ experience.date_fin|default:"Présent" }}</small><br>
+                            <p>{{ experience.description }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucune expérience professionnelle renseignée.</p>
+            {% endif %}
+        </div>
+
+        <!-- Formations -->
+        <div class="section">
+            <h3>Formations</h3>
+            {% if cv.formations.exists %}
+                <ul>
+                    {% for formation in cv.formations.all %}
+                        <li>
+                            <strong>{{ formation.diplome }}</strong> à {{ formation.etablissement }}<br>
+                            <small>{{ formation.date_debut }} - {{ formation.date_fin }}</small><br>
+                            <p>{{ formation.description }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucune formation renseignée.</p>
+            {% endif %}
+        </div>
+
+        <!-- Compétences -->
+        <div class="section">
+            <h3>Compétences</h3>
+            {% if cv.competences.exists %}
+                <ul>
+                    {% for competence in cv.competences.all %}
+                        <li>{{ competence.nom }} ({{ competence.niveau }})</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucune compétence renseignée.</p>
+            {% endif %}
+        </div>
+
+        <!-- Loisirs -->
+        <div class="section">
+            <h3>Loisirs et intérêts</h3>
+            <ul>
+                {% for loisir in cv.loisirs.all %}
+                    <li>{{ loisir.nom }}</li>
+                {% empty %}
+                    <li>Aucun loisir renseigné.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>CV généré le {{ cv.date_creation|date:"d/m/Y" }}</p>
+        </div>
+    </div>
+
+{% endblock %}
+

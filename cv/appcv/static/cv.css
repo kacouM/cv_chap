@@ -1,0 +1,111 @@
+/* Mise en forme générale */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 30px;
+    color: #4CAF50;
+}
+
+form {
+    width: 60%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Éléments de formulaire */
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #34495e;
+}
+
+input[type="text"], input[type="date"], select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button[type="submit"], button[type="button"] {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button[type="submit"]:hover, button[type="button"]:hover {
+    background-color: #2980b9;
+}
+
+/* Liens */
+a {
+    text-decoration: none;
+}
+
+a button {
+    background-color: #2ecc71;
+    margin-top: 10px;
+}
+
+a button:hover {
+    background-color: #27ae60;
+}
+
+/* Sélecteurs multiples */
+select[multiple] {
+    height: 150px;
+    background-color: #f9f9f9;
+}
+
+/* Structure des champs avec des espaces */
+div {
+    margin-bottom: 20px;
+}
+
+/* Pour les boutons de liens */
+a {
+    margin-top: 10px;
+    display: block;
+}
+
+/* Gestion des messages d'erreur */
+ul.error-list {
+    color: #e74c3c;
+    margin-top: 10px;
+    list-style-type: none;
+}
+
+/* En-tête et autres éléments */
+hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+form button[type="submit"] {
+    width: 100%;
+    font-size: 18px;
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #3498db;
+}
+
+form button[type="submit"]:hover {
+    background-color: #2980b9;
+}

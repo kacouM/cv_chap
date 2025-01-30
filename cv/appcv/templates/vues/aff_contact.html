@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Mes Informations de Contact{% endblock %}
+{% block style_page %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "experiencepro1.css" %}">
+{% endblock %}
+
+{% block content %}
+    <h1>Mes Informations de Contact</h1>
+    {% if contact %}
+        <p><strong>Email :</strong> {{ contact.email }}</p>
+        <p><strong>Téléphone :</strong> {{ contact.telephone }}</p>
+        <p><strong>Adresse :</strong> {{ contact.adresse }}</p>
+    {% else %}
+        <p>Aucune information de contact disponible.</p>
+    {% endif %}
+
+{% endblock %}

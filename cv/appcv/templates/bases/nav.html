@@ -1,0 +1,54 @@
+
+{% load static %}
+
+{% block style_page %}
+<link rel="stylesheet" href="{% static 'base1.css' %}">
+{% endblock %}
+
+<nav >
+    <!-- Logo et titre -->
+    <div class="nav-logo">
+        <img src="{% static 'images/cvchap_logo4.png' %}" alt="Logo" class="me-2">
+        <a class="nav-link {% if request.resolver_match.url_name == 'trombinoscope' %}active{% endif %}" href="{% url 'trombinoscope' %}">CvChap</a>
+    </div>
+    
+    <!-- Bouton toggle mobile -->
+    <!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>-->
+
+    <!-- Menu de navigation -->
+    
+    <ul >
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'trombinoscope' %}active{% endif %}" href="{% url 'trombinoscope' %}">Trombinoscope</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'list_cv' %}active{% endif %}" href="{% url 'list_cv' %}">Mes CV</a>
+            </li>
+            <li>
+                <a href="{% url 'TdeBord' %}">Tableau de bord</a>
+            </li>
+            <li>Bienvenue, {{ user.username }} !!</li>
+            <li class="nav-item">
+                <!-- Boutons pour l'utilisateur connecté -->
+                <form action="{% url 'logout' %}?next=/" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Déconnexion</button>
+                </form>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'trombinoscope' %}active{% endif %}" href="{% url 'trombinoscope' %}">Trombinoscope</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link_in {% if request.resolver_match.url_name == 'connexion' %}active{% endif %}" href="{% url 'formulaire' %}">Se connecter</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link_in {% if request.resolver_match.url_name == 'register' %}active{% endif %}" href="{% url 'register' %}">S'inscrire</a>
+            </li>
+            
+        {% endif %}
+    </ul>   
+</nav>

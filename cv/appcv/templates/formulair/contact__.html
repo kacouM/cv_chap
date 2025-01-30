@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ajouter/Modifier mes Informations de Contact</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'contact__.css' %}">
+</head>
+<body>
+    <h1>Modifier mes Informations de Contact</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="email">Email :</label>
+        <input type="email" name="email" id="email" value="{{ form.email.value|default:'' }}" required><br>
+
+        <label for="telephone">Téléphone :</label>
+        <input type="text" name="telephone" id="telephone" value="{{ form.telephone.value|default:'' }}"><br>
+
+        <label for="adresse">Adresse :</label>
+        <textarea name="adresse" id="adresse">{{ form.adresse.value|default:'' }}</textarea><br>
+
+        <button type="submit">Enregistrer</button>
+
+         <!-- Bouton pour voir les informations de contact -->
+    <a href="{% url 'aff_contact' %}">
+        <button type="button">Voir mes informations de contact</button>
+    </a>
+    </form>
+
+    {% include "partiel/retoure.html" %}
+   
+</body>
+</html>

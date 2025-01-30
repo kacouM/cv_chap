@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Créer un compte</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'compte.css' %}">
+</head>
+<body>
+    <h2 class="titre">Créer un compte</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">S'inscrire</button>
+    </form>
+    {% include "partiel/retoure.html" %}
+</body>
+</html>

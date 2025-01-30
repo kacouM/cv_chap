@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Ajouter une expérience{% endblock %}
+{% block style_page %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "experiencepro1.css" %}">
+{% endblock %}
+
+{% block content %}
+    <h1>Ajouter une expérience</h1>
+
+    <form class='from_exp' method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="titre">Titre :</label>
+            <input type="text" name="titre" id="titre" required>
+        </div>
+        <div>
+            <label for="entreprise">Entreprise :</label>
+            <input type="text" name="entreprise" id="entreprise" required>
+        </div>
+        <div>
+            <label for="date_debut">Date de début :</label>
+            <input type="date" name="date_debut" id="date_debut" required>
+        </div>
+        <div>
+            <label for="date_fin">Date de fin :</label>
+            <input type="date" name="date_fin" id="date_fin">
+        </div>
+        <div>
+            <label for="description">Description :</label>
+            <textarea name="description" id="description" required></textarea>
+        </div>
+        <div>
+            <button type="submit">Ajouter</button>
+        </div>
+        <a href="{% url 'aff_experiences' %}">
+            <button type="button">Voir mes expériences</button>
+        </a>
+    </form>
+{% endblock %}

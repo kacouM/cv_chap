@@ -1,0 +1,147 @@
+
+
+body{
+    margin: auto;
+    background-color: rgba(162, 154, 154, 0.15);
+}
+.cv{
+    border: 1px solid black;
+    /* width: 600px; */
+    width: 40%;
+    padding-bottom:5px ;
+    /* height: 730px; */
+    margin: auto;
+    background-color: white;
+}
+.im_nompre{
+    display: flex;
+    background-color: beige;
+    background-color: rgba(0, 0, 255, 0.374);/*un essai */
+}
+.im{
+  width: 25%; 
+  height: 140px;
+  background-color: blue; 
+  margin-top: 20px;
+  margin-left: 20px;
+  margin: 20px;
+}
+.im img{
+    width: 100%;
+    height: 100%;
+}
+.nompre{
+    margin-left: 20px;
+}
+hr{
+    width: 300px;
+}
+.pcl_tire{
+    display: flex;
+}
+.pcl{
+    width: 25%;   
+    height: 450px;
+    margin: 20px;
+    /* background-color: aqua;  */
+}
+.pcl div{
+    line-height: 15px;
+}
+.pcl h3{
+    background-color:rgba(0, 0, 0, 0.668);
+    color: white;
+    color: black;/*un essai */
+    text-align: center;
+    background-color: rgba(0, 0, 255, 0.374);  /*un essai */
+}
+span{
+ font-size: 17px;
+font-weight: 100;
+color: black; 
+}
+.petititre{
+    color: blue;
+    display: flex;
+    align-items: center;
+}
+.donnee{
+    font-size: 13px;
+}
+.profil{
+background-color: brown;
+}
+.tire_vertical{
+    margin-top: 10px;
+    border-left: 2px solid rgba(0, 0, 0, 0.648);
+    height: 470px;
+}
+.ex-for{
+    /* background-color: rgb(192, 184, 184); */
+    width: 60%;
+    margin: 20px;
+}
+.ex-for h2{
+    background-color:rgba(0, 0, 0, 0.668);
+    color: white;
+    color: black;/*un essai */
+    text-align: center; 
+    background-color: rgba(0, 0, 255, 0.374);  /*un essai */
+}
+.ex{ 
+    height: 45%;
+    /* background-color: rgba(165, 42, 42, 0.392); */
+}
+.for{
+   
+    height: 45%;
+    /* background-color: rgba(0, 128, 0, 0.364); */
+}
+.icone{
+    width: 35px;
+}
+.icone_telephone{
+    width: 25px;
+    margin-right: 5px;
+}
+.icone_date{
+    width: 25px;
+    margin-right: 8px;
+}
+.icone_language{
+    width: 25px;
+    margin-right: 8px;
+}
+.icone_competence{
+    width: 25px;
+}
+.ic_exp{
+    display: flex;
+    align-items: center;
+}
+.description{
+    border: 1px solid blue;
+    border-radius:10px;
+    background-color: brown;
+}
+.ic_for{
+    display: flex;
+    align-items: center; 
+}
+.icon-lang{
+    display: flex;
+    align-items: center;
+}
+.icon-compet{
+    display: flex;
+    align-items: center;
+}
+
+.icone_experience{
+    width: 35px;
+    margin-right: 8px;
+}
+.icone_formation{
+    width: 35px;
+    margin-right: 8px;
+}

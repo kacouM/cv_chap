@@ -1,0 +1,48 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérification du Mot de Passe</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'compte.css' %}">
+</head>
+<body>
+    <h1>Vérification du Mot de Passe</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" name="username" id="username" required>
+        </div>
+        <div>
+            <label for="password">Mot de passe :</label>
+            <input type="password" name="password" id="password" required>
+        </div>
+        <div>
+            <button type="submit">Valider</button>
+        </div>
+        {% if error_message %}
+            <p style="color:red;">{{ error_message }}</p>
+        {% endif %}
+    </form>
+
+    {% if user_authenticated %}
+        <h2 class="Bienvenue">Bienvenue,  {{user.username}} {{ personne.prenom }} </h2>
+        <!-- Afficher les formulaires ou autres informations de l'utilisateur -->
+        <a class="btncompte" href="{% url 'TdeBord' %}">Ajouter ou modifier informations</a>
+    {% endif %}
+
+    {% if user_not_found %}
+        <p class="annonce">veillez créer un compte si vous ne l'avez pas encore fait. </p>
+        <a class="btncompte" href="{% url 'register' %}">Créer un compte</a>
+    {% endif %}
+
+    {% include "partiel/retoure.html" %}
+
+</body>
+</html>
+

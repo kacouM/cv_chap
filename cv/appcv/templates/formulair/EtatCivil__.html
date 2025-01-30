@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Ajouter/Modifier mes Informations Personnelles{% endblock %}
+{% block style_page %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'EtatCivil1.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>Modifier mes Informations Personnelles</h1>
+    <form class='form_etat_c' method="POST" enctype="multipart/form-data">
+        <div>
+        {% csrf_token %}
+        <label for="nom">Nom :</label>
+        <input type="text" name="nom" id="nom" value="{{ form.nom.value|default:'' }}" required><br>
+
+        <label for="prenom">Prénom :</label>
+        <input type="text" name="prenom" id="prenom" value="{{ form.prenom.value|default:'' }}" required><br>
+
+        <label for="date_naissance">Date de Naissance :</label>
+        <input type="date" name="date_naissance" id="date_naissance" value="{{ form.date_naissance.value|default:'' }}" required><br>
+
+        <label for="photo">Photo :</label>
+        <input type="file" name="photo" id="photo"><br>
+        </div>
+
+        <button type="submit">Enregistrer</button>
+
+         <!-- Bouton pour voir les informations personnelles -->
+        <a href="{% url 'aff_personne' %}">
+            <button type="button">Voir mes informations personnelles</button>
+        </a>
+    </form>
+{% endblock %} 
+

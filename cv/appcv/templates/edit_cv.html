@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modifier un CV</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'creerLe_cv.css' %}">
+</head>
+<body>
+    <h1>Modifier un CV</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="id_title">Titre du CV :</label>
+        <input type="text" name="title" id="id_title" value="{{ form.title.value|default:'' }}" placeholder="Entrez un titre pour votre CV" required>
+        <br><br>
+
+        <!-- Champ pour sélectionner une Personne -->
+        <label for="personne">Personne :</label>
+        <select name="personne" id="personne" required>
+            {% for personne in personnes %}
+                <option value="{{ personne.id }}" {% if form.personne.value == personne.id %}selected{% endif %}>
+                    {{ personne.prenom }} {{ personne.nom }}
+                </option>
+            {% endfor %}
+        </select>
+        <a href="{% url 'EtatCivil' %}"><button type="button">Ajouter ou modifier mes informations personnelles</button></a>
+        <br><br>
+
+        <!-- Champ pour sélectionner un Contact -->
+        <label for="contact">Contact :</label>
+        <select name="contact" id="contact" required>
+            {% for contact in contacts %}
+                <option value="{{ contact.id }}" {% if form.contact.value == contact.id %}selected{% endif %}>
+                    {{ contact.email }}
+                </option>
+            {% endfor %}
+        </select>
+        <a href="{% url 'contact__' %}"><button type="button">Ajouter ou modifier mes informations de contact</button></a>
+        <br><br>
+
+        <!-- Champ pour le titre -->
+        <label for="id_title">Titre du CV :</label>
+        {{ form.title }}
+        <br><br>
+
+        <!-- Champ pour le design -->
+        <label for="id_design">Choisir un design :</label>
+        {{ form.design }}
+        <br><br>
+
+        <!-- Champ pour sélectionner des Expériences -->
+        <label for="experiences">Expériences :</label>
+        <div id="experiences">
+            {% for experience in experiences %}
+                <label>
+                    <input type="checkbox" name="experiences" value="{{ experience.id }}" {% if experience.id in form.experiences.value %}checked{% endif %}>
+                    {{ experience.titre }} chez {{ experience.entreprise }}
+                </label><br>
+            {% endfor %}
+        </div>
+        <a href="{% url 'experiencePro' %}"><button type="button">Ajouter une expérience</button></a>
+        <br><br>
+
+        <!-- Champ pour sélectionner des Formations -->
+        <label for="formations">Formations :</label>
+        <div id="formations">
+            {% for formation in formations %}
+                <label>
+                    <input type="checkbox" name="formations" value="{{ formation.id }}" {% if formation.id in form.formations.value %}checked{% endif %}>
+                    {{ formation.diplome }} à {{ formation.institution }}
+                </label><br>
+            {% endfor %}
+        </div>
+        <a href="{% url 'formation' %}"><button type="button">Ajouter des formations</button></a>
+        <br><br>
+
+        <!-- Champ pour sélectionner des Compétences -->
+        <label for="competences">Compétences :</label>
+        <div id="competences">
+            {% for competence in competences %}
+                <label>
+                    <input type="checkbox" name="competences" value="{{ competence.id }}" {% if competence.id in form.competences.value %}checked{% endif %}>
+                    {{ competence.nom }}
+                </label><br>
+            {% endfor %}
+        </div>
+        <a href="{% url 'competence' %}"><button type="button">Ajouter mes compétences</button></a>
+        <br><br>
+
+        <!-- Champ pour sélectionner des Langues -->
+        <label for="langues">Langues :</label>
+        <div id="langues">
+            {% for langue in langues %}
+                <label>
+                    <input type="checkbox" name="langues" value="{{ langue.id }}" {% if langue.id in form.langues.value %}checked{% endif %}>
+                    {{ langue.langue }} - {{ langue.niveau }}
+                </label><br>
+            {% endfor %}
+        </div>
+        <a href="{% url 'langue' %}"><button type="button">Ajouter mes langues</button></a>
+        <br><br>
+
+        <!-- Champ pour sélectionner des Loisirs -->
+        <label for="loisirs">Loisirs :</label>
+        <div id="loisirs">
+            {% for loisir in loisirs %}
+                <label>
+                    <input type="checkbox" name="loisirs" value="{{ loisir.id }}" {% if loisir.id in form.loisirs.value %}checked{% endif %}>
+                    {{ loisir.nom }}
+                </label><br>
+            {% endfor %}
+        </div>
+        <a href="{% url 'loisir' %}"><button type="button">Ajouter loisir</button></a>
+        <br><br>
+
+        <button type="submit">Enregistrer les modifications</button>
+        <a href="{% url 'list_cv' %}"><button class="Voircv" type="button">Annuler</button></a>
+    </form>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter une langue</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'langue.css' %}">
+</head>
+<body>
+    <h1>Ajouter une langue</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="langue">Langue :</label>
+            <input type="text" name="langue" id="langue" required>
+        </div>
+        <div>
+            <label for="niveau">Niveau :</label>
+            <input type="text" name="niveau" id="niveau" required>
+        </div>
+        <div>
+            <button type="submit">Ajouter</button>
+        </div>
+        
+        <a href="{% url 'aff_langue' %}">
+            <button type="button">Voir mes langues</button>
+        </a>
+        
+    </form>
+
+    {% include "partiel/retoure.html" %}
+
+</body>
+</html>

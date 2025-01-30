@@ -1,0 +1,39 @@
+/* Styles spécifiques pour la page list_cv */
+.cv-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.cv-item {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cv-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cv-link {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+.cv-link:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+.no-cv-message {
+    text-align: center;
+    color: #333;
+    font-style: italic;
+    margin: 20px 0;
+}

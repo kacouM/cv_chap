@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouveau Trombinoscope</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        .trombinoscope-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+        .person-card {
+            text-align: center;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .person-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .person-card img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .person-card a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .bts_otentifie_trombi {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .bts_otentifie_trombi button, .bts_otentifie_trombi a {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .bts_otentifie_trombi button:hover, .bts_otentifie_trombi a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Trombinoscope</h1>
+    </header>
+
+    <div class="bts_otentifie_trombi">
+        {% if user.is_authenticated %}
+            <!-- Boutons pour l'utilisateur connecté -->
+            <form action="{% url 'logout' %}?next={{ request.path }}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Déconnexion</button>
+            </form>
+            <a href="{% url 'TdeBord' %}">Tableau de bord</a>
+        {% else %}
+            <!-- Boutons pour l'utilisateur non connecté -->
+            <a href="{% url 'formulaire' %}">Connexion</a>
+            <a href="{% url 'register' %}">S'inscrire</a>
+        {% endif %}
+    </div>
+
+    <div class="trombinoscope-container">
+        {% for item in data %}
+        <div class="person-card">
+            <!-- Photo de la personne -->
+            {% if item.personne.photo and item.personne.photo.url %}
+                <a href="{% if item.premier_cv %}{% url 'cv_detail' item.premier_cv.id %}{% else %}#{% endif %}">
+                    <img src="{{ item.personne.photo.url }}" alt="Photo de {{ item.personne.prenom }} {{ item.personne.nom }}">
+                </a>
+            {% else %}
+                <p>Aucune photo disponible</p>
+            {% endif %}
+            <!-- Nom de la personne -->
+            <p>{{ item.personne.prenom }} <br> {{ item.personne.nom }}</p>
+            <!-- Lien vers le CV -->
+            {% if item.premier_cv %}
+                <a href="{% url 'cv_detail' item.premier_cv.id %}">En savoir plus</a>
+            {% else %}
+                <p>Aucun CV disponible</p>
+            {% endif %}
+        </div>
+        {% empty %}
+        <p style="text-align: center;">Aucun membre trouvé.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

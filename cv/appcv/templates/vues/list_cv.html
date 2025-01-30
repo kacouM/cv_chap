@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Mes CVs{% endblock %}
+{% block style_page %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'list_cv.css' %}">
+{% endblock %}
+    
+{% block content %}
+<h1>CVs disponible</h1>
+<div class='cv-list'>
+<!-- Afficher tous les CVs de l'utilisateur sur la page -->
+    {% if cvs %}
+        <ul>
+            {% for cv in cvs %}
+            <li class='cv-item'>
+                <strong>Nom :</strong> {{ cv.personne.prenom }} {{ cv.personne.nom }}<br>
+                <strong>Date de naissance :</strong> {{ cv.personne.date_naissance }}<br>
+                <strong>Email :</strong> {{ cv.contact.email }}<br>
+                <strong>Téléphone :</strong> {{ cv.contact.telephone }}<br>
+                <strong>Adresse :</strong> {{ cv.contact.adresse }}<br>
+                <strong>CV :</strong> <a href="{% url 'aff_CV' cv.id %}">Voir le CV</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>Aucun CV disponible.</p>
+        {% endif %}
+    {% include "partiel/retoure.html" %}
+</div>
+
+{% endblock content %}

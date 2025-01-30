@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV</title>
+</head>
+<body>
+    <h1>CV1 de {{ personne.nom }} {{ personne.prenom }}</h1>
+    {% if photo_url %}
+        <img src="{{ photo_url }}" alt="Photo de {{ personne.nom }}" style="max-width: 150px;">
+    {% endif %}
+    <p><strong>Date de naissance :</strong> {{ personne.date_naissance }}</p>
+    <hr>
+
+    <h2>Expériences professionnelles</h2>
+    <ul>
+        {% for experience in cv.experiences.all %}
+            <li>
+                <strong>{{ experience.titre }}</strong> - {{ experience.entreprise }} 
+                ({{ experience.date_debut }} - {{ experience.date_fin }})
+            </li>
+        {% empty %}
+            <li>Aucune expérience professionnelle ajoutée.</li>
+        {% endfor %}
+    </ul>
+    <hr>
+
+    <h2>Formations</h2>
+    <ul>
+        {% for formation in cv.formations.all %}
+            <li>
+                <strong>{{ formation.diplome }}</strong> - {{ formation.institution }}
+                ({{ formation.date_debut }} - {{ formation.date_fin }})
+            </li>
+        {% empty %}
+            <li>Aucune formation ajoutée.</li>
+        {% endfor %}
+    </ul>
+    <hr>
+
+    <h2>Compétences</h2>
+    <ul>
+        {% for competence in cv.competences.all %}
+            <li>{{ competence.nom }} (Niveau : {{ competence.niveau }})</li>
+        {% empty %}
+            <li>Aucune compétence ajoutée.</li>
+        {% endfor %}
+    </ul>
+    <hr>
+
+    <h2>Langues</h2>
+    <ul>
+        {% for langue in cv.langues.all %}
+            <li>{{ langue.langue }} (Niveau : {{ langue.niveau }})</li>
+        {% empty %}
+            <li>Aucune langue ajoutée.</li>
+        {% endfor %}
+    </ul>
+    <hr>
+
+    <h2>Loisirs</h2>
+    <ul>
+        {% for loisir in cv.loisirs.all %}
+            <li>{{ loisir.nom }} : {{ loisir.description }}</li>
+        {% empty %}
+            <li>Aucun loisir ajouté.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Mes Compétences{% endblock %}
+{% block style_page %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "experiencepro1.css" %}">
+{% endblock %}
+
+{% block content %}
+    <h1>Mes Compétences</h1>
+
+    {% if competences %}
+        <ul>
+            {% for competence in competences %}
+                <li>
+                    <strong>{{ competence.nom }}</strong><br>
+                    <p>{{ competence.niveau }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Vous n'avez pas encore ajouté de compétences.</p>
+    {% endif %}
+
+    <a href="{% url 'addCompetence' %}">
+        <button type="button">Ajouter une compétence</button>
+    </a>
+{%endblock%}

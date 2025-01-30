@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter une formation</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'formation.css' %}">
+</head>
+<body>
+    <h1>Ajouter une formation</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="diplome">Diplôme :</label>
+            <input type="text" name="diplome" id="diplome" required>
+        </div>
+        <div>
+            <label for="institution">Institution :</label>
+            <input type="text" name="institution" id="institution" required>
+        </div>
+        <div>
+            <label for="date_debut">Date de début :</label>
+            <input type="date" name="date_debut" id="date_debut" required>
+        </div>
+        <div>
+            <label for="date_fin">Date de fin :</label>
+            <input type="date" name="date_fin" id="date_fin" required>
+        </div>
+        <div>
+            <label for="description">Description :</label>
+            <textarea name="description" id="description" required></textarea>
+        </div>
+        <div>
+            <button type="submit">Ajouter</button>
+        </div>
+
+        <a href="{% url 'aff_formations' %}">
+            <button type="button">Voir mes formations</button>
+        </a>
+        
+    </form>
+
+    {% include "partiel/retoure.html" %}
+</body>
+</html>

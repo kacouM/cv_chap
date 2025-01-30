@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Mes Loisirs{% endblock %}
+{% block style_page %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "experiencepro1.css" %}">
+{% endblock %}
+
+{% block content %} 
+    <h1>Mes Loisirs</h1>
+
+    {% if loisirs %}
+        <ul>
+            {% for loisir in loisirs %}
+                <li>
+                    <p>{{ loisir.nom }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Vous n'avez pas encore ajouté de loisirs.</p>
+    {% endif %}
+
+    <a href="{% url 'addLoisir' %}">
+        <button type="button">Ajouter un loisir</button>
+    </a>
+
+    {% include "partiel/retoure.html" %}
+    
+{% endblock %}
+
